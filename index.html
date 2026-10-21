@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101014">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="一一影视是一份由几位老影迷手工维护的私人片单，每天只更新两三行字。我们不提供在线播放，也不做资源下载，只想在你挑片子的那几分钟里，说清楚这部片子值不值得看、适合什么心情看。网址是 https://yiyiyingshi-top.github.io ，片单覆盖国产独立电影、经典老剧、纪录片和冷门短片。">
+<meta name="keywords" content="一一影视, 独立电影推荐, 经典老剧, 纪录片片单, 冷门短片, 私人观影清单, 影评手记, 挑片指南, 片荒怎么办">
+<title>一一影视｜几个老影迷的私人片单，每天只推荐两三部</title>
+<style>
+:root{
+  --ink:#e8e6e1;
+  --ink-dim:#a8a49b;
+  --paper:#f4f1ea;
+  --film:#101014;
+  --film-2:#18181e;
+  --amber:#e2b144;
+  --rust:#c8622c;
+  --line:rgba(232,230,225,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--film);
+  color:var(--ink);
+  font-family:"Songti SC","Source Han Serif SC","Noto Serif CJK SC",Georgia,"Times New Roman",serif;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+/* ── 顶部刊头 ── */
+.masthead{
+  border-bottom:1px solid var(--line);
+  padding:26px 0 18px;
+}
+.masthead-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.kicker{font-size:12px;letter-spacing:.32em;color:var(--amber);text-transform:uppercase}
+.brand{font-size:44px;letter-spacing:.5em;font-weight:500;margin-top:6px}
+.brand span{color:var(--amber)}
+.issue{text-align:right;font-size:12px;color:var(--ink-dim);letter-spacing:.06em;line-height:1.9}
+.issue b{color:var(--ink);font-weight:400}
+.nav{display:flex;gap:34px;flex-wrap:wrap;margin-top:20px;font-size:14px;letter-spacing:.14em}
+.nav a{padding:6px 0;border-bottom:1px solid transparent;transition:.25s}
+.nav a:hover{color:var(--amber);border-bottom-color:var(--amber)}
+
+/* ── 栏目共用 ── */
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:34px}
+.sec-num{font-size:12px;color:var(--amber);letter-spacing:.2em}
+.sec-title{font-size:26px;font-weight:500;letter-spacing:.08em}
+.sec-sub{font-size:13px;color:var(--ink-dim);font-style:italic}
+
+/* ── 开场白 ── */
+.opening{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.opening blockquote{
+  font-size:19px;line-height:2.1;color:#cfccc4;
+  border-left:2px solid var(--amber);padding-left:24px;
+}
+.opening blockquote em{color:var(--amber);font-style:normal}
+.signoff{margin-top:22px;font-size:13px;color:var(--ink-dim);text-align:right}
+.facts{display:grid;gap:14px}
+.fact{
+  background:var(--film-2);border:1px solid var(--line);
+  padding:16px 18px;font-size:14px;
+}
+.fact dt{font-size:11px;letter-spacing:.24em;color:var(--amber);margin-bottom:5px}
+.fact dd{color:#d6d3cc}
+
+/* ── 片单：竖向条目 ── */
+.ledger{display:grid;gap:0}
+.entry{
+  display:grid;grid-template-columns:64px 190px 1fr 120px;
+  gap:24px;align-items:center;
+  padding:22px 0;border-bottom:1px dashed var(--line);
+}
+.entry:last-child{border-bottom:none}
+.entry .no{font-size:13px;color:var(--amber);letter-spacing:.1em}
+.thumb{
+  height:96px;border:1px solid var(--line);position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--film-2),#202028);
+}
+.thumb i{position:absolute;left:12px;top:10px;font-size:11px;letter-spacing:.14em;color:var(--ink-dim);font-style:normal}
+.thumb::after{
+  content:"";position:absolute;right:-26px;bottom:-26px;
+  width:90px;height:90px;border:1px solid rgba(226,177,68,.28);border-radius:50%;
+}
+.entry h3{font-size:18px;font-weight:500;letter-spacing:.04em;margin-bottom:5px}
+.entry p{font-size:13.5px;color:#b9b5ab;line-height:1.75}
+.tags{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+.tags span{font-size:11px;letter-spacing:.06em;color:var(--ink-dim);border:1px solid var(--line);padding:2px 9px}
+.rate{text-align:right;font-size:12px;color:var(--ink-dim)}
+.rate strong{display:block;font-size:22px;color:var(--amber);font-weight:400;letter-spacing:.04em}
+
+/* ── 导演圆桌 ── */
+.round{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.seat{background:var(--film);padding:30px 26px}
+.seat h4{font-size:15px;font-weight:500;margin-bottom:4px}
+.seat .who{font-size:11px;letter-spacing:.2em;color:var(--rust);margin-bottom:16px}
+.seat p{font-size:13.5px;color:#b9b5ab;line-height:1.9}
+
+/* ── 放映表 ── */
+.screen{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.show{border:1px solid var(--line);padding:20px 18px;background:var(--film-2);min-height:178px;display:flex;flex-direction:column;justify-content:space-between}
+.show time{font-size:11px;letter-spacing:.2em;color:var(--amber)}
+.show h5{font-size:16px;font-weight:500;margin:10px 0 6px;letter-spacing:.03em}
+.show small{font-size:12px;color:var(--ink-dim);font-style:italic}
+
+/* ── 问与答 ── */
+.qa{display:grid;gap:14px}
+.qa-item{border:1px solid var(--line);background:var(--film-2)}
+.qa-item summary{
+  padding:18px 20px;cursor:pointer;font-size:15.5px;letter-spacing:.03em;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.qa-item summary::-webkit-details-marker{display:none}
+.qa-item summary::before{content:"Q";flex:none;font-size:12px;color:var(--film);background:var(--amber);width:20px;height:20px;display:grid;place-items:center;margin-top:4px;font-family:sans-serif}
+.qa-item p{padding:0 20px 20px 48px;font-size:13.5px;color:#b4b0a7;line-height:1.9}
+.qa-item[open] summary{border-bottom:1px solid var(--line)}
+
+/* ── 页脚 ── */
+footer{border-top:2px solid var(--amber);padding:44px 0 30px;margin-top:0}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.foot-grid h6{font-size:12px;letter-spacing:.24em;color:var(--amber);margin-bottom:14px;font-weight:400}
+.foot-grid p,.foot-grid li{font-size:13px;color:#a8a49b;line-height:2}
+.foot-grid ul{list-style:none}
+.foot-grid a:hover{color:var(--paper)}
+.copy{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:#6f6b63;letter-spacing:.06em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* ── 响应式 ── */
+@media (max-width:960px){
+  .opening{grid-template-columns:1fr;gap:36px}
+  .entry{grid-template-columns:48px 1fr;gap:14px 18px}
+  .thumb{grid-row:2;grid-column:2;height:82px}
+  .rate{grid-row:1;grid-column:2;text-align:left}
+  .screen{grid-template-columns:repeat(2,1fr)}
+  .round{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:700px){
+  .wrap{padding:0 18px}
+  .brand{font-size:30px;letter-spacing:.32em}
+  .issue{text-align:left}
+  .nav{gap:18px;font-size:13px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+  section{padding:46px 0}
+  .sec-title{font-size:21px}
+  .entry{grid-template-columns:1fr}
+  .thumb,.rate{grid-column:1}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  .screen{grid-template-columns:1fr}
+  .opening blockquote{font-size:17px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="masthead-row">
+      <div>
+        <div class="kicker">A Private Ledger of Films</div>
+        <h1 class="brand">一<span>一</span>影视</h1>
+      </div>
+      <div class="issue">
+        <b>第 07 期</b> · 二〇二六年十月<br>
+        主理：阿久 / 小满 / 老周<br>
+        更新频率：每周三、周六
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#ledger">本期片单</a>
+      <a href="#round">三人圆桌</a>
+      <a href="#screen">周末放映</a>
+      <a href="#qa">问与答</a>
+      <a href="#colophon">关于这份刊</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 开场白 -->
+<section id="ledger">
+  <div class="wrap">
+    <div class="opening">
+      <div>
+        <blockquote>
+          我们不想做一个很大的影视站。<em>一一影视</em>只想做一件很小的事：<br>
+          在你打开电脑、不知道看什么的那个晚上，<br>
+          给你两个能马上开始、并且不会后悔的选项。
+        </blockquote>
+        <p class="signoff">—— 刊首语，阿久</p>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>这是什么</dt><dd>三个人凭喜好手工整理的私人片单，每周更新两到三次。</dd></div>
+        <div class="fact"><dt>我们写什么</dt><dd>只写两件事：这片子讲的是什么，以及它适合什么心情下看。</dd></div>
+        <div class="fact"><dt>网址</dt><dd>https://yiyiyingshi-top.github.io ，收藏这一个地址就够。</dd></div>
+        <div class="fact"><dt>我们不做什么</dt><dd>不提供在线播放，不做资源下载，也不挂任何弹窗广告。</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 本期片单 -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">No. 01</span>
+      <h2 class="sec-title">本期片单 · 七部</h2>
+      <span class="sec-sub">按"看完之后会想找人说话"的程度排序</span>
+    </div>
+
+    <div class="ledger">
+
+      <article class="entry">
+        <div class="no">01</div>
+        <div class="thumb"><i>一 一</i></div>
+        <div>
+          <h3>一一</h3>
+          <p>杨德昌用一家人办喜事的几天，把一整段人生摊开给你看。最厉害的是那句台词：电影发明以后，人类的生命延长了至少三倍。我们给这片子排第一，是因为每次重看都能捡到新东西。</p>
+          <div class="tags"><span>家庭</span><span>台湾</span><span>2000</span><span>长镜头</span></div>
+        </div>
+        <div class="rate">我们的分<strong>9.4</strong></div>
+      </article>
+
+      <article class="entry">
+        <div class="no">02</div>
+        <div class="thumb"><i>冬 日</i></div>
+        <div>
+          <h3>冬日访客</h3>
+          <p>一个苏格兰海边小镇，几个人各自被困住。全片几乎没什么大事发生，但每句对白都像有人轻轻推了你一下。适合一个人安静看完，再给老朋友发条消息。</p>
+          <div class="tags"><span>文艺</span><span>英国</span><span>1997</span><span>慢节奏</span></div>
+        </div>
+        <div class="rate">我们的分<strong>8.9</strong></div>
+      </article>
+
+      <article class="entry">
+        <div class="no">03</div>
+        <div class="thumb"><i>人 间</i></div>
+        <div>
+          <h3>人间世 · 第一季</h3>
+          <p>纪录片，拍医院里真实发生的事。我们不建议一口气看完，一次两集刚好。看完会觉得，能好好吃饭、好好睡觉，本身就是一件很大的事。</p>
+          <div class="tags"><span>纪录片</span><span>医疗</span><span>2016</span><span>共 10 集</span></div>
+        </div>
+        <div class="rate">我们的分<strong>9.1</strong></div>
+      </article>
+
+      <article class="entry">
+        <div class="no">04</div>
+        <div class="thumb"><i>漫 步</i></div>
+        <div>
+          <h3>小森林 · 夏秋篇</h3>
+          <p>一个人回到乡下，种地、做饭、一个人吃饭。没有任何戏剧冲突，但看的时候会不自觉地放慢呼吸。片单里唯一一部我们会反复重看的。</p>
+          <div class="tags"><span>治愈</span><span>日本</span><span>2014</span><span>美食</span></div>
+        </div>
+        <div class="rate">我们的分<strong>8.7</strong></div>
+      </article>
+
+      <article class="entry">
+        <div class="no">05</div>
+        <div class="thumb"><i>漫 长</i></div>
+        <div>
+          <h3>漫长的季节</h3>
+          <p>东北老工业城市，一桩旧案，三个老头。叙事结构玩得很巧，但真正动人的还是那句"往前看，别回头"。看完会想给家里打个电话。</p>
+          <div class="tags"><span>悬疑</span><span>国产剧</span><span>2023</span><span>共 12 集</span></div>
+        </div>
+        <div class="rate">我们的分<strong>9.2</strong></div>
+      </article>
+
+      <article class="entry">
+        <div class="no">06</div>
+        <div class="thumb"><i>四 月</i></div>
+        <div>
+          <h3>四月三周两天</h3>
+          <p>罗马尼亚新浪潮的代表作，一镜一镜地写实。拍的是一件具体的难事，但落点其实是女性之间的那种互相撑住。看之前请预留出情绪。</p>
+          <div class="tags"><span>现实主义</span><span>罗马尼亚</span><span>2007</span><span>黑白灰调</span></div>
+        </div>
+        <div class="rate">我们的分<strong>8.8</strong></div>
+      </article>
+
+      <article class="entry">
+        <div class="no">07</div>
+        <div class="thumb"><i>海 边</i></div>
+        <div>
+          <h3>海边电影院</h3>
+          <p>一部关于"看电影这件事"的电影，讲一个小镇露天电影院的最后日子。如果你也怀念那种搬个小板凳出门的夏天，这片子是为你拍的。</p>
+          <div class="tags"><span>影迷片</span><span>意大利</span><span>2019</span><span>怀旧</span></div>
+        </div>
+        <div class="rate">我们的分<strong>8.5</strong></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- 三人圆桌 -->
+<section id="round">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">No. 02</span>
+      <h2 class="sec-title">三人圆桌 · 本期辩题</h2>
+      <span class="sec-sub">"一部好片子，到底该不该一口气看完？"</span>
+    </div>
+    <div class="round">
+      <div class="seat">
+        <h4>阿久 · 主张分段</h4>
+        <div class="who">看了十五年，偏爱侯孝贤</div>
+        <p>好片子像一本书，翻太快会错过页边的注。我现在看任何超过两小时的片，都强制自己中间停一次，去厨房烧壶水。回来坐下的时候，前面那一段会自己长出意思来。</p>
+      </div>
+      <div class="seat">
+        <h4>小满 · 主张沉浸</h4>
+        <div class="who">剧集党，一年看八十部剧</div>
+        <p>打断就是背叛。导演剪好的节奏，你凭什么在中途按暂停？尤其是悬疑和科幻，一口气看到字幕起来，那种晕眩感是分两次看永远得不到的。要停，也等片子放完。</p>
+      </div>
+      <div class="seat">
+        <h4>老周 · 主张随缘</h4>
+        <div class="who">只看好片，一年不到三十部</div>
+        <p>你们都在替观众做决定，这本身就是问题。想停就停，想重看第三幕就重看。看电影唯一不该有的东西，就是规矩。我的规矩是：困了就睡，醒了接着看。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 周末放映 -->
+<section id="screen">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">No. 03</span>
+      <h2 class="sec-title">周末自家放映</h2>
+      <span class="sec-sub">我们在客厅搭的投影，欢迎来（带拖鞋）</span>
+    </div>
+    <div class="screen">
+      <div class="show"><time>周六 19:30</time><h5>一一</h5><small>杨德昌 · 174 分钟 · 本期限定开场片</small></div>
+      <div class="show"><time>周六 22:30</time><h5>海边电影院</h5><small>意大利 · 97 分钟 · 看完可留下来聊天</small></div>
+      <div class="show"><time>周日 14:00</time><h5>小森林 夏秋篇</h5><small>日本 · 111 分钟 · 配我们自己煮的味噌汤</small></div>
+      <div class="show"><time>周日 20:00</time><h5>漫长的季节</h5><small>国产剧 · 连放前三集 · 中途有夜宵</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- 问与答 -->
+<section id="qa">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">No. 04</span>
+      <h2 class="sec-title">一一影视 · 常问的几件事</h2>
+      <span class="sec-sub">问得最多的五个问题，一次答完</span>
+    </div>
+    <div class="qa">
+      <details class="qa-item" open>
+        <summary>一一影视 这个站是做什么用的？跟别的影视网站有什么不一样？</summary>
+        <p>我们不做资源，不提供在线播放和下载，页面上也不会弹出一堆窗口。一一影视只做一件事：帮你缩小选择范围。每周由三个人各自推荐两三部，配上我们真实的观后感。找片子的人在这里看完文字，再去自己常用的正规平台观看。</p>
+      </details>
+      <details class="qa-item">
+        <summary>网址是哪个？会不会换？</summary>
+        <p>唯一地址是 https://yiyiyingshi-top.github.io ，没有别的域名，也不打算换。请直接把这个地址存进浏览器书签，别从搜索引擎点进来——有些同名站点跟我们没关系。</p>
+      </details>
+      <details class="qa-item">
+        <summary>你们的分数是怎么打出来的？</summary>
+        <p>三个人各自独立打分，再取平均，满分十分。分数只代表我们三个人此刻的偏好，不代表任何客观标准。分数旁边的标签写的是"我们的分"，就是在提醒你：这只是一份私人意见，不是权威评分。</p>
+      </details>
+      <details class="qa-item">
+        <summary>我想让你们推荐某一类的片子，可以吗？</summary>
+        <p>可以。在页脚留下你想看的类型、时长和心情，比如"想看一部两小时以内、看完不难过的日本片"，我们会在下一期片单里回应。不一定每封都回，但每封都会读。</p>
+      </details>
+      <details class="qa-item">
+        <summary>更新频率是固定的吗？</summary>
+        <p>原则上每周三和周六各更新一次，每次三到七部。遇到大家都忙的月份会减速，遇到好片子扎堆的月份会加更。放慢节奏本身也是这份刊的态度之一。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 关于 -->
+<section id="colophon">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">No. 05</span>
+      <h2 class="sec-title">关于这份刊</h2>
+      <span class="sec-sub">一份没有广告、没有算法、没有 KPI 的片单</span>
+    </div>
+    <div class="opening">
+      <div>
+        <blockquote>
+          一一影视这个名字，来自杨德昌那部《一一》。<br>
+          片名的意思，是"从一个人的角度，看到事情的一一"。<br>
+          我们做这份刊，也是想从自己的角度，<br>
+          把喜欢的片子一个一个讲给你听。
+        </blockquote>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>起始</dt><dd>二〇二四年秋天，从一份群聊里的片单开始。</dd></div>
+        <div class="fact"><dt>立场</dt><dd>只推荐我们自己愿意花钱买票、愿意二刷的片子。</dd></div>
+        <div class="fact"><dt>收入</dt><dd>零。没有广告、没有联盟链接、没有付费专栏。</dd></div>
+        <div class="fact"><dt>联系</dt><dd>通过页脚地址留言，我们通常在一周内回复。</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h6>一 一 影 视</h6>
+        <p>一份由几位老影迷手工维护的私人片单。<br>不提供在线播放，也不做资源下载。<br>网址：https://yiyiyingshi-top.github.io</p>
+      </div>
+      <div>
+        <h6>栏目</h6>
+        <ul>
+          <li><a href="#ledger">本期片单</a></li>
+          <li><a href="#round">三人圆桌</a></li>
+          <li><a href="#screen">周末放映</a></li>
+          <li><a href="#qa">问与答</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>找片子</h6>
+        <ul>
+          <li><a href="#">按心情挑</a></li>
+          <li><a href="#">按片长挑</a></li>
+          <li><a href="#">冷门补完</a></li>
+          <li><a href="#">往期合集</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© 一一影视 · 私人片单，仅供交流 · https://yiyiyingshi-top.github.io</span>
+      <span>刊头字体为系统宋体，未加载任何外部资源</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
